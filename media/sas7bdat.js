@@ -162,7 +162,7 @@ window.addEventListener("message", event => {
 						const keys = Object.keys(rowData[0]);
 
 						var columnDefs = keys.map(element => {
-							return { headerName: element, field: element, }
+							return { headerName: element, field: element, filter: true }
 						});
 
 						window.allRowData = rowData.length
@@ -171,9 +171,21 @@ window.addEventListener("message", event => {
 							columnDefs: columnDefs,
 							rowData: rowData,
 							defaultColDef: {
-								width: 120,
+								width: 150,
 								sortable: true,
 								resizable: true,
+								filter: true,
+								/*floatingFilter: true,*/
+								editable: false,
+							},
+							statusBar: {
+								statusPanels: [
+									{ statusPanel: 'agTotalAndFilteredRowCountComponent', align: 'left' },
+									{ statusPanel: 'agTotalRowCountComponent', align: 'center' },
+									{ statusPanel: 'agFilteredRowCountComponent' },
+									{ statusPanel: 'agSelectedRowCountComponent' },
+									{ statusPanel: 'agAggregationComponent' },
+								],
 							},
 						};
 

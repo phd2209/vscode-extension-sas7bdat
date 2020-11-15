@@ -142,7 +142,6 @@ class Sas7bdatPreview extends basePreview_1.default {
 			</div>
 
 			<script nonce="${nonce}" src="${this.webMediaUri}/ag-grid-community.min.noStyle.js"></script>
-			<!--<script nonce="${nonce}" src="${this.webMediaUri}/main.js"></script>-->
 			
 			<script type="text/javascript">			
             	function ignoreState() {
