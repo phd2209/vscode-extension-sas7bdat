@@ -1,0 +1,94 @@
+{
+	"name": "sas-dataset-viewer",
+	"description": "Viewer for sas datasets",
+	"version": "0.0.1",
+	"publisher": "ME-TA Aps",
+	"engines": {
+		"vscode": "^1.47.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"keywords": [
+		"SAS",
+		"sas7bdat",
+		"viewer",
+		"vscode"
+	],
+	"activationEvents": [
+		"onCommand:sas7bdat.preview",
+		"onLanguage:sas7bdat",
+		"onWebviewPanel:sas-dataset-viewer"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/microsoft/vscode-extension-samples.git"
+	},
+	"main": "./out/extension.js",
+	"contributes": {
+		"languages": [
+			{
+				"id": "sas7bdat",
+				"extensions": [
+					".sas7bdat"
+				],
+				"aliases": [
+					"SAS7BDAT"
+				]
+			}
+		],
+		"commands": [
+			{
+				"command": "sas7bdat.preview",
+				"category": "Sas dataset viewer",
+				"title": "Open Preview"
+			}
+		],
+		"menus": {
+			"explorer/context": [
+				{
+					"when": "resourceLangId == sas7bdat",
+					"command": "sas7bdat.preview",
+					"group": "navigation"
+				}
+			],
+			"editor/title": [
+				{
+					"when": "editorLangId == sas7bdat",
+					"command": "sas7bdat.preview",
+					"group": "navigation"
+				}
+			],
+			"editor/title/context": [
+				{
+					"when": "editorLangId == sas7bdat",
+					"command": "sas7bdat.preview",
+					"group": "navigation"
+				}
+			]
+		},
+		"keybindings": [
+			{
+				"command": "sas7bdat.preview",
+				"key": "shift+ctrl+v",
+				"mac": "shift+cmd+v",
+				"when": "editorLangId == sas7bdat"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint . --ext .ts,.tsx",
+		"watch": "tsc -w -p ./"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^3.0.2",
+		"@typescript-eslint/parser": "^3.0.2",
+		"eslint": "^7.1.0",
+		"typescript": "^4.0.2",
+		"@types/vscode": "^1.47.0",
+		"@types/node": "^12.12.0"
+	}
+}
