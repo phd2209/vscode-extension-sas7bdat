@@ -137,13 +137,10 @@ function diffRows(newArray) {
 }
 
 function addItems(newItems) {
-	//var newItems = [createNewRowData(), createNewRowData(), createNewRowData()];
-	//console.log(newItems, addIndex)
-	var res = gridOptions.api.applyTransaction({
-		add: newItems,
-	});
-	//gridOptions.api.applyTransactionAsync({ add: newItems }, resultCallback);
-	//printResult(res);
+	//var res = gridOptions.api.applyTransaction({
+	//	add: newItems,
+	//});
+	gridOptions.api.applyTransactionAsync({ add: newItems });
 }
 window.addEventListener("message", event => {
 	if (event.data.refresh) {
@@ -200,11 +197,8 @@ window.addEventListener("message", event => {
 
 					else {
 						const diff = diffRows(rowData)
-						//console.log("diff " + diff.length)
 						window.allRowData = window.allRowData + diff.length
-						//console.log("full dataset " + window.allRowData)
 						if (diff.length > 0) {
-							//window.allRowData = window.allRowData + diff.length
 							addItems(diff)
 						}
 					}
