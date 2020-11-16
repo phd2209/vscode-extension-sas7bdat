@@ -162,11 +162,16 @@ window.addEventListener("message", event => {
 							return { headerName: element, field: element, filter: true }
 						});
 
-						window.allRowData = rowData.length
+						//window.allRowData = rowData.length
 						//Create gridOptions
 						window.gridOptions = {
 							columnDefs: columnDefs,
-							rowData: rowData,
+							rowData: [],
+							suppressColumnMoveAnimation: true,
+							suppressMovableColumns: true,
+							suppressColumnStateEvents: true,
+							suppressRowDrag: true,
+							suppressMoveWhenRowDragging: true,
 							defaultColDef: {
 								width: 150,
 								sortable: true,
@@ -174,17 +179,9 @@ window.addEventListener("message", event => {
 								filter: true,
 								/*floatingFilter: true,*/
 								editable: false,
-							},
-							statusBar: {
-								statusPanels: [
-									{ statusPanel: 'agTotalAndFilteredRowCountComponent', align: 'left' },
-									{ statusPanel: 'agTotalRowCountComponent', align: 'center' },
-									{ statusPanel: 'agFilteredRowCountComponent' },
-									{ statusPanel: 'agSelectedRowCountComponent' },
-									{ statusPanel: 'agAggregationComponent' },
-								],
-							},
+							}
 						};
+
 
 						//Set style based on vscode mode
 						const className = (document.body.classList.contains('vscode-dark')) ? 'ag-theme-alpine-dark' : 'ag-theme-alpine';
@@ -193,13 +190,19 @@ window.addEventListener("message", event => {
 
 						// create the grid passing in the div to use together with the columns & data we want to use
 						new agGrid.Grid(eGridDiv, gridOptions);
+						gridOptions.api.showLoadingOverlay();
 					}
 
 					else {
 						const diff = diffRows(rowData)
-						window.allRowData = window.allRowData + diff.length
-						if (diff.length > 0) {
+						console.log(diff.length)
+
+						if (diff.length > 50) {
+							window.allRowData = window.allRowData + diff.length
 							addItems(diff)
+							if (window.allRowData < 100) {
+								gridOptions.api.hideOverlay();
+							}
 						}
 					}
 				}
